@@ -27,16 +27,16 @@ export function ContainerTextFlip({
   const id = useId();
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [width, setWidth] = useState(100);
-  const textRef = React.useRef(null);
+  const textRef = React.useRef<HTMLDivElement>(null);
 
   const updateWidthForWord = () => {
     if (textRef.current) {
       // Add some padding to the text width (30px on each side)
-      // @ts-ignore
       const textWidth = textRef.current.scrollWidth + 30;
       setWidth(textWidth);
     }
   };
+
 
   useEffect(() => {
     // Update width whenever the word changes
@@ -53,7 +53,7 @@ export function ContainerTextFlip({
   }, [words, interval]);
 
   return (
-    <motion.p
+    <motion.span
       layout
       layoutId={`words-here-${id}`}
       animate={{ width }}
@@ -66,7 +66,7 @@ export function ContainerTextFlip({
       )}
       key={words[currentWordIndex]}
     >
-      <motion.div
+      <motion.span
         transition={{
           duration: animationDuration / 1000,
           ease: "easeInOut",
@@ -75,7 +75,7 @@ export function ContainerTextFlip({
         ref={textRef}
         layoutId={`word-div-${words[currentWordIndex]}-${id}`}
       >
-        <motion.div className="inline-block">
+        <motion.span className="inline-block">
           {words[currentWordIndex].split("").map((letter, index) => (
             <motion.span
               key={index}
@@ -94,8 +94,9 @@ export function ContainerTextFlip({
               {letter}
             </motion.span>
           ))}
-        </motion.div>
-      </motion.div>
-    </motion.p>
+        </motion.span>
+      </motion.span>
+    </motion.span>
   );
 }
+

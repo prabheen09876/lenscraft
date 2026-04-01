@@ -12,7 +12,8 @@ export const ParallaxScroll = ({
   images: string[];
   className?: string;
 }) => {
-  const gridRef = useRef<any>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
   const { scrollYProgress } = useScroll({
     target: gridRef, // Track the element itself relative to the window
     offset: ["start end", "end start"], // Start animating when top hits bottom of screen, end when bottom hits top

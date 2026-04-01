@@ -51,9 +51,9 @@ export default function CanvasSequencePlayer({ progress }: CanvasSequencePlayerP
     const imgRatio = img.width / img.height;
     const canvasRatio = width / height;
 
-    let drawWidth, drawHeight, offsetX, offsetY;
-
     const PADDING_FACTOR = 0.65; // Use 65% of the screen so it's fully zoomed out and sharp
+
+    let drawWidth, drawHeight;
 
     if (canvasRatio > imgRatio) {
       // Fit to height
@@ -65,12 +65,13 @@ export default function CanvasSequencePlayer({ progress }: CanvasSequencePlayerP
       drawHeight = drawWidth / imgRatio;
     }
 
-    offsetX = (width - drawWidth) / 2;
-    offsetY = (height - drawHeight) / 2;
+    const offsetX = (width - drawWidth) / 2;
+    const offsetY = (height - drawHeight) / 2;
 
     ctx.fillStyle = "#050505";
     ctx.fillRect(0, 0, width, height);
     ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+
   };
 
   useEffect(() => {
